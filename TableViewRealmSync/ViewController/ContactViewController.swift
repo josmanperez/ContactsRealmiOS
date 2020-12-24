@@ -33,6 +33,7 @@ class ContactViewController: UIViewController {
         errorLabel.text = text
     }
 
+    /// This will be better if detect if there is no change made
     @IBAction func updateContact(_ sender: Any) {
         if !firstName.hasText || !lastName.hasText {
             setFeedbackLabel(with: "FirstName & LastName are mandatory fields", error: true)
