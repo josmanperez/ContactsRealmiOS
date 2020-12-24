@@ -20,10 +20,10 @@ class AddNameViewController: UIViewController {
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
     
+    var delegate: SaveContactDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.title = "Add new contact"
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
 
     @IBAction func save(_ sender: Any) {
@@ -42,7 +42,9 @@ class AddNameViewController: UIViewController {
                     contact.firstName = _firstName
                     contact.lastName = _lastName
                     realm.add(contact)
-                    self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true) {
+                        self.delegate?.onSave()
+                    }
                 }
             } catch (let error) {
                 debugPrint(error.localizedDescription)

@@ -9,7 +9,11 @@ import UIKit
 import RealmSwift
 import Realm
 
-class ViewController: UIViewController {
+protocol SaveContactDelegate {
+    func onSave()
+}
+
+class ContactListViewController: UIViewController, SaveContactDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -60,7 +64,7 @@ class ViewController: UIViewController {
         var configuration = user.configuration(partitionValue: partitionValue)
         configuration.objectTypes = [Contact.self]
         
-                
+        
         Realm.asyncOpen() { (result) in
             switch result {
             case .failure(let error):
@@ -69,16 +73,33 @@ class ViewController: UIViewController {
             case .success(let realm):
                 let contacts = realm.objects(Contact.self)
                 debugPrint(contacts)
-                // Get all tasks in the realm
-                //let tasks = realm.objects(ContactTest.self)
-                // Retain notificationToken as long as you want to observe
-
+            // Get all tasks in the realm
+            //let tasks = realm.objects(ContactTest.self)
+            // Retain notificationToken as long as you want to observe
+            
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addNewContact" {
+            if let vc = segue.destination as? AddNameViewController {
+                vc.delegate = self
+            }
+        }
+        else if segue.identifier == "showContactDetail" {
+            if let vc = segue.destination as? ContactViewController, let contact = sender as? Contact {
+                vc.contact = contact
+            }
+        }
+    }
+    
+    func onSave() {
+        self.tableView.reloadData()
+    }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ContactListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -96,7 +117,25 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let _contact = contacts?[indexPath.row] else { return }
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    realm.delete(_contact)
+                }
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            } catch (let error) {
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let contact = contacts?[indexPath.row] else { return }
+        performSegue(withIdentifier: "showContactDetail", sender: contact)
+    }
     
 }
 
