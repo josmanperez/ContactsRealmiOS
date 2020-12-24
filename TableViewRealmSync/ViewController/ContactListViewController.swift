@@ -18,13 +18,13 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     var contacts:Results<Contact>?
-    let app = App(id: "mindme-lqkmq")
+    var realm: Realm?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        readFromDB()
-        //connect()
+        //readFromDB()
+        connect()
     }
     
     func readFromDB() {
@@ -56,27 +56,22 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
     }
     
     func openRealm(user: User) {
-        let client = user.mongoClient("mongodb-atlas")
-        let database = client.database(named: "mindMe")
-        let collection = database.collection(withName: "Contacts")
-        debugPrint(collection)
-        let partitionValue = "AccountId"
+        //let client = user.mongoClient("mongodb-atlas")
+        //let database = client.database(named: "mindMe")
+        //let collection = database.collection(withName: "Contacts")
+        //debugPrint(collection)
+        let partitionValue = Contact._partition
         var configuration = user.configuration(partitionValue: partitionValue)
         configuration.objectTypes = [Contact.self]
-        
         
         Realm.asyncOpen() { (result) in
             switch result {
             case .failure(let error):
-                print("Failed to open realm: \(error.localizedDescription)")
-            // Handle error...
+                debugPrint("Failed to open realm: \(error.localizedDescription)")
             case .success(let realm):
-                let contacts = realm.objects(Contact.self)
-                debugPrint(contacts)
-            // Get all tasks in the realm
-            //let tasks = realm.objects(ContactTest.self)
-            // Retain notificationToken as long as you want to observe
-            
+                self.contacts = realm.objects(Contact.self)
+                self.tableView.reloadData()
+                debugPrint(self.contacts ?? "Empty")
             }
         }
     }

@@ -10,6 +10,8 @@ import RealmSwift
 
 class Contact: Object {
     
+    static let _partition = "contacts"
+    
     @objc dynamic var _id: ObjectId = ObjectId.generate()
     @objc dynamic var _partition: String = ""
     @objc dynamic var firstName: String = ""

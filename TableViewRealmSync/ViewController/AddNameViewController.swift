@@ -9,8 +9,6 @@ import UIKit
 import RealmSwift
 
 class AddNameViewController: UIViewController {
-    
-    static let _partition = "contacts"
 
     @IBOutlet weak var firstName: UITextField! {
         didSet {
@@ -25,6 +23,31 @@ class AddNameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    fileprivate func saveContact(firstName: String, lastName: String, completionHandler: @escaping (Bool) -> Void) {
+        let user = app.currentUser!
+        Realm.asyncOpen(configuration: user.configuration(partitionValue: Contact._partition)) {
+            (resutl) in
+            switch resutl {
+            case .failure(let error):
+                debugPrint("Failed to open realm: \(error.localizedDescription)")
+                completionHandler(false)
+            case .success(let realm):
+                do {
+                    try realm.write {
+                        let contact = Contact(partition: Contact._partition)
+                        contact.firstName = firstName
+                        contact.lastName = lastName
+                        realm.add(contact)
+                        completionHandler(true)
+                    }
+                } catch (let error) {
+                    debugPrint("Failed to open realm: \(error.localizedDescription)")
+                    completionHandler(false)
+                }
+            }
+        }
+    }
 
     @IBAction func save(_ sender: Any) {
         if !firstName.hasText || !lastName.hasText {
@@ -35,20 +58,15 @@ class AddNameViewController: UIViewController {
                 return
             }
             errorLabel.text?.removeAll()
-            do {
-                let realm = try Realm()
-                try realm.write {
-                    let contact = Contact(partition: AddNameViewController._partition)
-                    contact.firstName = _firstName
-                    contact.lastName = _lastName
-                    realm.add(contact)
+            saveContact(firstName: _firstName, lastName: _lastName) {
+                success in
+                if success {
                     self.dismiss(animated: true) {
                         self.delegate?.onSave()
                     }
+                } else {
+                    self.errorLabel.text = "There is an unexpected error trying to save to Realm"
                 }
-            } catch (let error) {
-                debugPrint(error.localizedDescription)
-                errorLabel.text = "There is an unexpected error trying to save to Realm"
             }
         }
     }
