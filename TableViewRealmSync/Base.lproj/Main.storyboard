@@ -95,9 +95,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nwV-79-W4A">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="6MQ-jc-R6N"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="6MQ-jc-R6N">
+                            <connections>
+                                <action selector="updateContact:" destination="HXN-EJ-EAS" id="95q-OY-dfF"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="errorLabel" destination="qO2-TE-Fy5" id="lxy-L2-Eh4"/>
                         <outlet property="firstName" destination="99J-t4-5fX" id="Tsy-Oh-ZOa"/>
                         <outlet property="lastName" destination="uBm-vu-db1" id="Xyn-Mf-0Ux"/>
                     </connections>
