@@ -9,6 +9,8 @@ import UIKit
 import RealmSwift
 
 class AddNameViewController: UIViewController {
+    
+    static let _partition = "contacts"
 
     @IBOutlet weak var firstName: UITextField! {
         didSet {
@@ -36,7 +38,7 @@ class AddNameViewController: UIViewController {
             do {
                 let realm = try Realm()
                 try realm.write {
-                    let contact = Contact()
+                    let contact = Contact(partition: AddNameViewController._partition)
                     contact.firstName = _firstName
                     contact.lastName = _lastName
                     realm.add(contact)

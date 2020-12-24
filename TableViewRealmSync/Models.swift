@@ -19,7 +19,7 @@ class Contact: Object {
         return "_id"
     }
     
-    convenience init(partition: String, name: String) {
+    convenience init(partition: String) {
         self.init()
         self._partition = partition
     }

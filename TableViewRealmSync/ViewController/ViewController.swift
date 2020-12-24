@@ -13,12 +13,23 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var contacts:Results<Contact>?
     let app = App(id: "mindme-lqkmq")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        connect()
+        readFromDB()
+        //connect()
+    }
+    
+    func readFromDB() {
+        do {
+            contacts = try Realm().objects(Contact.self)
+            tableView.reloadData()
+        } catch (let error) {
+            debugPrint(error.localizedDescription)
+        }
     }
     
     /// Initial configuration for the tableView
@@ -73,13 +84,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.contacts?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        guard let _contacts = contacts else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.textLabel?.text = "Hola"
+        cell.textLabel?.text = "\(_contacts[indexPath.row].firstName) \(_contacts[indexPath.row].lastName)"
         return cell
         
     }
