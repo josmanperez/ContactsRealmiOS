@@ -67,12 +67,12 @@
 				9918C5D32593A3F900833B24 /* AppDelegate.swift */,
 				9918C5D52593A3F900833B24 /* SceneDelegate.swift */,
 				9918C5D72593A3F900833B24 /* ViewController.swift */,
+				9918C5F82594B03100833B24 /* AddNameViewController.swift */,
 				9918C5D92593A3F900833B24 /* Main.storyboard */,
 				9918C5DC2593A3FA00833B24 /* Assets.xcassets */,
 				9918C5DE2593A3FA00833B24 /* LaunchScreen.storyboard */,
 				9918C5E12593A3FA00833B24 /* Info.plist */,
 				9918C5EF2593A7F800833B24 /* Models.swift */,
-				9918C5F82594B03100833B24 /* AddNameViewController.swift */,
 			);
 			path = TableViewRealmSync;
 			sourceTree = "<group>";

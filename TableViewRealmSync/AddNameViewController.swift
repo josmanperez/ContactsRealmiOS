@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AddNameViewController: UIViewController {
 
@@ -19,15 +20,32 @@ class AddNameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        navigationController?.title = "Add new contact"
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
 
     @IBAction func save(_ sender: Any) {
         if !firstName.hasText || !lastName.hasText {
             errorLabel.text = "Both first name & last name are mandatory"
         } else {
+            guard let _firstName = firstName.text, let _lastName = lastName.text else {
+                errorLabel.text = "An unexpected error has occurred"
+                return
+            }
             errorLabel.text?.removeAll()
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    let contact = Contact()
+                    contact.firstName = _firstName
+                    contact.lastName = _lastName
+                    realm.add(contact)
+                    self.dismiss(animated: true, completion: nil)
+                }
+            } catch (let error) {
+                debugPrint(error.localizedDescription)
+                errorLabel.text = "There is an unexpected error trying to save to Realm"
+            }
         }
     }
     
