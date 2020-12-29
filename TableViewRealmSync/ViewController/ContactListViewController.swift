@@ -59,6 +59,30 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
         }
     }
     
+    func observeForChanges() {
+        self.notificationToken = self.contacts?.observe{ [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView
+                tableView.beginUpdates()
+                // Always apply updates in the following order: deletions, insertions, then modifications.
+                // Handling insertions before deletions may result in unexpected behavior.
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                     with: .automatic)
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.endUpdates()
+            case .error(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
+
     func openRealm(user: User) {
         //let client = user.mongoClient("mongodb-atlas")
         //let database = client.database(named: "mindMe")
@@ -73,29 +97,7 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
                 debugPrint("Failed to open realm: \(error.localizedDescription)")
             case .success(let realm):
                 self.contacts = realm.objects(Contact.self)
-                self.notificationToken = self.contacts?.observe{ [weak self] (changes: RealmCollectionChange) in
-                    guard let tableView = self?.tableView else { return }
-                    switch changes {
-                    case .initial:
-                        tableView.reloadData()
-                    case .update(_, let deletions, let insertions, let modifications):
-                        // Query results have changed, so apply them to the UITableView
-                        tableView.beginUpdates()
-                        // Always apply updates in the following order: deletions, insertions, then modifications.
-                        // Handling insertions before deletions may result in unexpected behavior.
-                        tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
-                                             with: .automatic)
-                        tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
-                                             with: .automatic)
-                        tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
-                                             with: .automatic)
-                        tableView.endUpdates()
-                    case .error(let error):
-                        debugPrint(error.localizedDescription)
-                    }
-                }
-                self.tableView.reloadData()
-                debugPrint(self.contacts ?? "Empty")
+                self.observeForChanges()
             }
         }
     }
