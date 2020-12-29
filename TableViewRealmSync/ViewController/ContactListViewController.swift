@@ -60,11 +60,10 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
         //let database = client.database(named: "mindMe")
         //let collection = database.collection(withName: "Contacts")
         //debugPrint(collection)
-        let partitionValue = Contact._partition
-        var configuration = user.configuration(partitionValue: partitionValue)
+        var configuration = user.configuration(partitionValue: Contact._partition)
         configuration.objectTypes = [Contact.self]
         
-        Realm.asyncOpen() { (result) in
+        Realm.asyncOpen(configuration: configuration) { (result) in
             switch result {
             case .failure(let error):
                 debugPrint("Failed to open realm: \(error.localizedDescription)")
