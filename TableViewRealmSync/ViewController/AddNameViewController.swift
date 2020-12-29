@@ -18,8 +18,6 @@ class AddNameViewController: UIViewController {
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
     
-    var delegate: SaveContactDelegate?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -61,9 +59,7 @@ class AddNameViewController: UIViewController {
             saveContact(firstName: _firstName, lastName: _lastName) {
                 success in
                 if success {
-                    self.dismiss(animated: true) {
-                        self.delegate?.onSave()
-                    }
+                    self.dismiss(animated: true)
                 } else {
                     self.errorLabel.text = "There is an unexpected error trying to save to Realm"
                 }

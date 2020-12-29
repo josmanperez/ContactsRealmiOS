@@ -18,13 +18,17 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     var contacts:Results<Contact>?
-    var realm: Realm?
+    var notificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         //readFromDB()
         connect()
+    }
+    
+    deinit {
+        self.notificationToken?.invalidate()
     }
     
     func readFromDB() {
@@ -69,6 +73,27 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
                 debugPrint("Failed to open realm: \(error.localizedDescription)")
             case .success(let realm):
                 self.contacts = realm.objects(Contact.self)
+                self.notificationToken = self.contacts?.observe{ [weak self] (changes: RealmCollectionChange) in
+                    guard let tableView = self?.tableView else { return }
+                    switch changes {
+                    case .initial:
+                        tableView.reloadData()
+                    case .update(_, let deletions, let insertions, let modifications):
+                        // Query results have changed, so apply them to the UITableView
+                        tableView.beginUpdates()
+                        // Always apply updates in the following order: deletions, insertions, then modifications.
+                        // Handling insertions before deletions may result in unexpected behavior.
+                        tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                             with: .automatic)
+                        tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                             with: .automatic)
+                        tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                             with: .automatic)
+                        tableView.endUpdates()
+                    case .error(let error):
+                        debugPrint(error.localizedDescription)
+                    }
+                }
                 self.tableView.reloadData()
                 debugPrint(self.contacts ?? "Empty")
             }
@@ -76,12 +101,7 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addNewContact" {
-            if let vc = segue.destination as? AddNameViewController {
-                vc.delegate = self
-            }
-        }
-        else if segue.identifier == "showContactDetail" {
+        if segue.identifier == "showContactDetail" {
             if let vc = segue.destination as? ContactViewController, let contact = sender as? Contact {
                 vc.contact = contact
                 vc.delegate = self
