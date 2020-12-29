@@ -19,6 +19,7 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
     
     var contacts:Results<Contact>?
     var notificationToken: NotificationToken?
+    var realm: Realm?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +97,7 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
             case .failure(let error):
                 debugPrint("Failed to open realm: \(error.localizedDescription)")
             case .success(let realm):
+                self.realm = realm
                 self.contacts = realm.objects(Contact.self)
                 self.observeForChanges()
             }
@@ -121,6 +123,7 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.contacts?.count ?? 0
     }
@@ -136,13 +139,11 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let _contact = contacts?[indexPath.row] else { return }
+            guard let _contact = contacts?[indexPath.row], let realm = realm else { return }
             do {
-                let realm = try Realm()
                 try realm.write {
                     realm.delete(_contact)
                 }
-                tableView.deleteRows(at: [indexPath], with: .fade)
             } catch (let error) {
                 debugPrint(error.localizedDescription)
             }
