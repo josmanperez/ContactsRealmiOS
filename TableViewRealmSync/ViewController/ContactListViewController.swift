@@ -108,7 +108,7 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
         if segue.identifier == "showContactDetail" {
             if let vc = segue.destination as? ContactViewController, let contact = sender as? Contact {
                 vc.contact = contact
-                vc.delegate = self
+                vc.realm = realm
             }
         }
     }
