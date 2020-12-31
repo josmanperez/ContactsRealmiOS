@@ -98,7 +98,7 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
                 debugPrint("Failed to open realm: \(error.localizedDescription)")
             case .success(let realm):
                 self.realm = realm
-                self.contacts = realm.objects(Contact.self)
+                self.contacts = realm.objects(Contact.self).sorted(byKeyPath: "firstName")
                 self.observeForChanges()
             }
         }
