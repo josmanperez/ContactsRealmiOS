@@ -132,6 +132,7 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource 
         
         guard let _contacts = contacts else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        cell.selectionStyle = .none
         cell.textLabel?.text = "\(_contacts[indexPath.row].firstName) \(_contacts[indexPath.row].lastName)"
         return cell
         
