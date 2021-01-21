@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 class LoginViewController: UIViewController {
-
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
         didSet {
             activityIndicator.isHidden = true
@@ -43,14 +43,27 @@ class LoginViewController: UIViewController {
         password.isEnabled = !loading
         email.isEnabled = !loading
     }
-
+    
     @IBAction func signUp(_ sender: Any) {
-        
+        guard let email = email.text, let password = password.text else { return }
+        setLoading(true)
+        app.emailPasswordAuth.registerUser(email: email, password: password) { [weak self](error) in
+            DispatchQueue.main.async {
+                self?.setLoading(false)
+                guard error == nil else {
+                    print("Signup failed \(error!)")
+                    self?.errorMessage.text = "Signup failed: \(error?.localizedDescription ?? "")"
+                    return
+                }
+                self?.errorMessage.text = "Signup successful!"
+                self?.signIn()
+            }
+        }
         
     }
     
     
-    @IBAction func signIn(_ sender: Any) {
+    @IBAction func signIn() {
         guard let email = email.text, let password = password.text else { return }
         setLoading(true)
         app.login(credentials: Credentials.emailPassword(email: email, password: password)) {
@@ -59,8 +72,19 @@ class LoginViewController: UIViewController {
                 self.setLoading(false)
                 switch result {
                 case .success(let user):
+                    self.setLoading(true)
                     var configuraiton = user.configuration(partitionValue: "user=\(user.id)")
                     configuraiton.objectTypes = [Contact.self]
+                    Realm.asyncOpen(configuration: configuraiton) {
+                        [weak self](result) in
+                        self?.setLoading(false)
+                        switch result {
+                        case .failure(let error):
+                            self?.errorMessage.text = "Failed to open Realm \(error.localizedDescription)"
+                        case .success(let userRealm):
+                            self?.performSegue(withIdentifier: "showContactList", sender: userRealm)
+                        }
+                    }
                 case .failure(let error):
                     self.errorMessage.text = "Login failed: \(error.localizedDescription)"
                     self.errorMessage.isHidden = false
@@ -68,8 +92,17 @@ class LoginViewController: UIViewController {
                 }
             }
         }
-
+        
     }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showContactList" {
+            if let vc = segue.destination as? UINavigationController, let targetController = vc.topViewController as? ContactListViewController, let realm = sender as? Realm {
+                vc.modalPresentationStyle = .fullScreen
+                targetController.realm = realm
+            }
+        }
+    }
+    
+    
 }

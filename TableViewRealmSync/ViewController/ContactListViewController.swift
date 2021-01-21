@@ -85,10 +85,6 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
     }
 
     func openRealm(user: User) {
-        //let client = user.mongoClient("mongodb-atlas")
-        //let database = client.database(named: "mindMe")
-        //let collection = database.collection(withName: "Contacts")
-        //debugPrint(collection)
         var configuration = user.configuration(partitionValue: Contact._partition)
         configuration.objectTypes = [Contact.self]
         
