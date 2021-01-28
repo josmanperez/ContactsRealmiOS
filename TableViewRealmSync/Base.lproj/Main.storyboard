@@ -41,6 +41,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Contact List" id="WkU-B1-OlU">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="hu6-bW-tGY">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Mn6-Pr-sJc">
+                                <rect key="frame" x="20" y="13" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Log out"/>
+                                <connections>
+                                    <action selector="logOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SYn-tV-Hn2"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HkD-kb-zqX">
                             <connections>
                                 <segue destination="F0q-3H-KP9" kind="presentation" identifier="addNewContact" id="72N-zi-luQ"/>

@@ -50,7 +50,7 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
     }
     
     func observeForChanges() {
-        self.notificationToken = self.contacts?.observe{ [weak self] (changes: RealmCollectionChange) in
+        self.notificationToken = self.contacts?.observe { [weak self] (changes: RealmCollectionChange) in
             guard let tableView = self?.tableView else { return }
             switch changes {
             case .initial:
@@ -72,22 +72,22 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
             }
         }
     }
-
-//    func openRealm(user: User) {
-//        var configuration = user.configuration(partitionValue: Contact._partition)
-//        configuration.objectTypes = [Contact.self]
-//
-//        Realm.asyncOpen(configuration: configuration) { (result) in
-//            switch result {
-//            case .failure(let error):
-//                debugPrint("Failed to open realm: \(error.localizedDescription)")
-//            case .success(let realm):
-//                self.realm = realm
-//                self.contacts = realm.objects(Contact.self).sorted(byKeyPath: "firstName")
-//                self.observeForChanges()
-//            }
-//        }
-//    }
+    
+    @IBAction func logOut(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Log Out", message: "", preferredStyle: .alert);
+        alertController.addAction(UIAlertAction(title: "Yes, Log Out", style: .destructive, handler: {
+            alert -> Void in
+            print("Logging out...");
+            app.currentUser?.logOut() { (error) in
+                DispatchQueue.main.async {
+                    print("Logged out!");
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showContactDetail" {
