@@ -8,8 +8,10 @@
 import UIKit
 import RealmSwift
 
-class AddNameViewController: UIViewController {
-
+class AddContactViewController: UIViewController {
+    
+    var user: Usuario?
+    
     @IBOutlet weak var firstName: UITextField! {
         didSet {
             firstName.becomeFirstResponder()
@@ -20,11 +22,16 @@ class AddNameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     fileprivate func saveContact(firstName: String, lastName: String, completionHandler: @escaping (Bool) -> Void) {
+        guard let partition = user?._partition else {
+            completionHandler(false)
+            return
+        }
         let user = app.currentUser!
-        Realm.asyncOpen(configuration: user.configuration(partitionValue: Contact._partition)) {
+        Realm.asyncOpen(configuration: user.configuration(partitionValue: partition)) {
             (resutl) in
             switch resutl {
             case .failure(let error):
@@ -33,7 +40,7 @@ class AddNameViewController: UIViewController {
             case .success(let realm):
                 do {
                     try realm.write {
-                        let contact = Contact(partition: Contact._partition)
+                        let contact = Contact(partition: partition)
                         contact.firstName = firstName
                         contact.lastName = lastName
                         realm.add(contact)

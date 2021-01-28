@@ -16,7 +16,7 @@
 		9918C5EA2593A6AD00833B24 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 9918C5E92593A6AD00833B24 /* Realm */; };
 		9918C5EC2593A6AD00833B24 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9918C5EB2593A6AD00833B24 /* RealmSwift */; };
 		9918C5F02593A7F800833B24 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918C5EF2593A7F800833B24 /* Models.swift */; };
-		9918C5F92594B03100833B24 /* AddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918C5F82594B03100833B24 /* AddNameViewController.swift */; };
+		9918C5F92594B03100833B24 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918C5F82594B03100833B24 /* AddContactViewController.swift */; };
 		99518EF425A35EEF00807E13 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99518EF325A35EEF00807E13 /* LoginViewController.swift */; };
 		99E12E522594C37C00B97468 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E12E512594C37C00B97468 /* ContactViewController.swift */; };
 /* End PBXBuildFile section */
@@ -31,7 +31,7 @@
 		9918C5DF2593A3FA00833B24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9918C5E12593A3FA00833B24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9918C5EF2593A7F800833B24 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		9918C5F82594B03100833B24 /* AddNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNameViewController.swift; sourceTree = "<group>"; };
+		9918C5F82594B03100833B24 /* AddContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		99518EF325A35EEF00807E13 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99E12E512594C37C00B97468 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				9918C5D72593A3F900833B24 /* ContactListViewController.swift */,
-				9918C5F82594B03100833B24 /* AddNameViewController.swift */,
+				9918C5F82594B03100833B24 /* AddContactViewController.swift */,
 				99E12E512594C37C00B97468 /* ContactViewController.swift */,
 				99518EF325A35EEF00807E13 /* LoginViewController.swift */,
 			);
@@ -170,7 +170,7 @@
 			files = (
 				99518EF425A35EEF00807E13 /* LoginViewController.swift in Sources */,
 				9918C5F02593A7F800833B24 /* Models.swift in Sources */,
-				9918C5F92594B03100833B24 /* AddNameViewController.swift in Sources */,
+				9918C5F92594B03100833B24 /* AddContactViewController.swift in Sources */,
 				9918C5D82593A3F900833B24 /* ContactListViewController.swift in Sources */,
 				9918C5D42593A3F900833B24 /* AppDelegate.swift in Sources */,
 				9918C5D62593A3F900833B24 /* SceneDelegate.swift in Sources */,

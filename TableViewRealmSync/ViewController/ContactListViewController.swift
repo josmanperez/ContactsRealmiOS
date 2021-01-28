@@ -20,44 +20,33 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
     var contacts:Results<Contact>?
     var notificationToken: NotificationToken?
     var realm: Realm?
+    var userData: Usuario?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        //readFromDB()
-        connect()
+        configureUser()
+        //connect()
     }
     
     deinit {
         self.notificationToken?.invalidate()
     }
     
-    func readFromDB() {
-        do {
-            contacts = try Realm().objects(Contact.self)
-            tableView.reloadData()
-        } catch (let error) {
-            debugPrint(error.localizedDescription)
+    func configureUser() {
+        guard let user = realm?.objects(Usuario.self).first else {
+            return
         }
+        self.userData = user
+        self.contacts = realm?.objects(Contact.self)
+        self.observeForChanges()
+        self.tableView.reloadData()
     }
     
     /// Initial configuration for the tableView
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-    }
-    
-    func connect() {
-        app.login(credentials: Credentials.anonymous) { result in
-            switch result {
-            case .success(let user):
-                debugPrint("Login as \(user) succeded!")
-                self.openRealm(user: user)
-            case .failure(let error):
-                debugPrint("Login failed: \(error.localizedDescription)")
-            }
-            
-        }
     }
     
     func observeForChanges() {
@@ -84,27 +73,31 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
         }
     }
 
-    func openRealm(user: User) {
-        var configuration = user.configuration(partitionValue: Contact._partition)
-        configuration.objectTypes = [Contact.self]
-        
-        Realm.asyncOpen(configuration: configuration) { (result) in
-            switch result {
-            case .failure(let error):
-                debugPrint("Failed to open realm: \(error.localizedDescription)")
-            case .success(let realm):
-                self.realm = realm
-                self.contacts = realm.objects(Contact.self).sorted(byKeyPath: "firstName")
-                self.observeForChanges()
-            }
-        }
-    }
+//    func openRealm(user: User) {
+//        var configuration = user.configuration(partitionValue: Contact._partition)
+//        configuration.objectTypes = [Contact.self]
+//
+//        Realm.asyncOpen(configuration: configuration) { (result) in
+//            switch result {
+//            case .failure(let error):
+//                debugPrint("Failed to open realm: \(error.localizedDescription)")
+//            case .success(let realm):
+//                self.realm = realm
+//                self.contacts = realm.objects(Contact.self).sorted(byKeyPath: "firstName")
+//                self.observeForChanges()
+//            }
+//        }
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showContactDetail" {
             if let vc = segue.destination as? ContactViewController, let contact = sender as? Contact {
                 vc.contact = contact
                 vc.realm = realm
+            }
+        } else if segue.identifier == "addNewContact" {
+            if let vc = segue.destination as? AddContactViewController {
+                vc.user = userData
             }
         }
     }

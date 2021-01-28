@@ -197,10 +197,10 @@
             </objects>
             <point key="canvasLocation" x="132" y="-692"/>
         </scene>
-        <!--Add Name View Controller-->
+        <!--Add Contact View Controller-->
         <scene sceneID="NBP-8C-le2">
             <objects>
-                <viewController id="F0q-3H-KP9" customClass="AddNameViewController" customModule="TableViewRealmSync" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F0q-3H-KP9" customClass="AddContactViewController" customModule="TableViewRealmSync" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Zb-w6-xtA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

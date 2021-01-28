@@ -53,6 +53,7 @@ class LoginViewController: UIViewController {
                 guard error == nil else {
                     print("Signup failed \(error!)")
                     self?.errorMessage.text = "Signup failed: \(error?.localizedDescription ?? "")"
+                    self?.errorMessage.isHidden = false
                     return
                 }
                 self?.errorMessage.text = "Signup successful!"
@@ -74,7 +75,7 @@ class LoginViewController: UIViewController {
                 case .success(let user):
                     self.setLoading(true)
                     var configuraiton = user.configuration(partitionValue: "user=\(user.id)")
-                    configuraiton.objectTypes = [Contact.self]
+                    configuraiton.objectTypes = [Usuario.self, Contact.self]
                     Realm.asyncOpen(configuration: configuraiton) {
                         [weak self](result) in
                         self?.setLoading(false)
