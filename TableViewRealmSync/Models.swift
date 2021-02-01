@@ -33,6 +33,7 @@ class Usuario: Object {
     @objc dynamic var _id: String = ""
     @objc dynamic var _partition: String = ""
     @objc dynamic var name: String = ""
+    @objc dynamic var providerType: String = ""
 
     override class func primaryKey() -> String {
         return "_id"

@@ -41,7 +41,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Contact List" id="WkU-B1-OlU">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="hu6-bW-tGY">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="hu6-bW-tGY">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Mn6-Pr-sJc">
                                 <rect key="frame" x="20" y="13" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -105,7 +105,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nwV-79-W4A">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="6MQ-jc-R6N">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="6MQ-jc-R6N">
                             <connections>
                                 <action selector="updateContact:" destination="HXN-EJ-EAS" id="95q-OY-dfF"/>
                             </connections>
@@ -136,7 +136,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ipZ-S1-h1y">
-                                <rect key="frame" x="20" y="122.5" width="374" height="171.5"/>
+                                <rect key="frame" x="20" y="122.5" width="374" height="241.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r1P-SY-Xx4">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
@@ -173,7 +173,19 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDK-7f-xgd" customClass="GIDSignInButton">
+                                        <rect key="frame" x="0.0" y="191.5" width="374" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Lb8-Su-s84"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="KDK-7f-xgd" secondAttribute="trailing" id="7L0-bO-uVh"/>
+                                    <constraint firstItem="KDK-7f-xgd" firstAttribute="leading" secondItem="ipZ-S1-h1y" secondAttribute="leading" id="dgt-G4-dRd"/>
+                                    <constraint firstAttribute="bottom" secondItem="KDK-7f-xgd" secondAttribute="bottom" id="l1S-pf-WKk"/>
+                                </constraints>
                             </stackView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="JbB-e9-KFb">
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
@@ -197,6 +209,7 @@
                         <outlet property="activityIndicator" destination="JbB-e9-KFb" id="Lda-Iy-iKj"/>
                         <outlet property="email" destination="r1P-SY-Xx4" id="JMA-Pq-axv"/>
                         <outlet property="errorMessage" destination="BwC-iW-Eci" id="ime-wr-jPW"/>
+                        <outlet property="googleSignInBtn" destination="KDK-7f-xgd" id="r8O-zZ-HOI"/>
                         <outlet property="password" destination="0cd-Yo-qE2" id="m3h-yp-beK"/>
                         <outlet property="signInBtn" destination="5Aa-p4-Wud" id="dWb-5Y-Slt"/>
                         <outlet property="signUpBtn" destination="fGS-76-z69" id="12r-DH-i5L"/>

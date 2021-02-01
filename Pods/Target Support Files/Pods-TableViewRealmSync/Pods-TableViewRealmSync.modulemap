@@ -1,0 +1,6 @@
+framework module Pods_TableViewRealmSync {
+  umbrella header "Pods-TableViewRealmSync-umbrella.h"
+
+  export *
+  module * { export * }
+}
