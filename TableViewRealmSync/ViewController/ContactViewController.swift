@@ -15,7 +15,7 @@ class ContactViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     
     var contact:Contact?
-    var delegate:SaveContactDelegate?
+    var realm: Realm?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,20 +38,15 @@ class ContactViewController: UIViewController {
         if !firstName.hasText || !lastName.hasText {
             setFeedbackLabel(with: "FirstName & LastName are mandatory fields", error: true)
         } else {
-            guard let _firstName = firstName.text, let _lastName = lastName.text else {
+            guard let realm = realm, let _firstName = firstName.text, let _lastName = lastName.text else {
                 return
             }
             errorLabel.text?.removeAll()
             do {
-                let realm = try Realm()
                 try realm.write {
                     contact?.firstName = _firstName
                     contact?.lastName = _lastName
-                    self.setFeedbackLabel(with: "Contact updated!", error: false)
-                    self.delegate?.onSave()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self.navigationController?.popViewController(animated: true)
-                    }
+                    self.navigationController?.popViewController(animated: true)
                 }
             } catch (let error) {
                 debugPrint(error.localizedDescription)

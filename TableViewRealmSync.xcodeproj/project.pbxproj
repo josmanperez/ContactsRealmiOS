@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		122E736DB28EF8F58239E9C5 /* Pods_TableViewRealmSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BA10CCFE9F9418E6BE80F8 /* Pods_TableViewRealmSync.framework */; };
 		9918C5D42593A3F900833B24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918C5D32593A3F900833B24 /* AppDelegate.swift */; };
 		9918C5D62593A3F900833B24 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918C5D52593A3F900833B24 /* SceneDelegate.swift */; };
 		9918C5D82593A3F900833B24 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918C5D72593A3F900833B24 /* ContactListViewController.swift */; };
@@ -16,11 +17,14 @@
 		9918C5EA2593A6AD00833B24 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 9918C5E92593A6AD00833B24 /* Realm */; };
 		9918C5EC2593A6AD00833B24 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9918C5EB2593A6AD00833B24 /* RealmSwift */; };
 		9918C5F02593A7F800833B24 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918C5EF2593A7F800833B24 /* Models.swift */; };
-		9918C5F92594B03100833B24 /* AddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918C5F82594B03100833B24 /* AddNameViewController.swift */; };
+		9918C5F92594B03100833B24 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918C5F82594B03100833B24 /* AddContactViewController.swift */; };
+		99518EF425A35EEF00807E13 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99518EF325A35EEF00807E13 /* LoginViewController.swift */; };
+		99A19B3625C84B420091ABD8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 99A19B3525C84B420091ABD8 /* GoogleService-Info.plist */; };
 		99E12E522594C37C00B97468 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E12E512594C37C00B97468 /* ContactViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		290A262554EBA74D3EE4EFA4 /* Pods-TableViewRealmSync.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TableViewRealmSync.debug.xcconfig"; path = "Target Support Files/Pods-TableViewRealmSync/Pods-TableViewRealmSync.debug.xcconfig"; sourceTree = "<group>"; };
 		9918C5D02593A3F900833B24 /* TableViewRealmSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewRealmSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9918C5D32593A3F900833B24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9918C5D52593A3F900833B24 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,8 +34,12 @@
 		9918C5DF2593A3FA00833B24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9918C5E12593A3FA00833B24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9918C5EF2593A7F800833B24 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		9918C5F82594B03100833B24 /* AddNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNameViewController.swift; sourceTree = "<group>"; };
+		9918C5F82594B03100833B24 /* AddContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
+		99518EF325A35EEF00807E13 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		99A19B3525C84B420091ABD8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		99E12E512594C37C00B97468 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		A0BA10CCFE9F9418E6BE80F8 /* Pods_TableViewRealmSync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TableViewRealmSync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D98ABBDB0EE5324EE0D25C54 /* Pods-TableViewRealmSync.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TableViewRealmSync.release.xcconfig"; path = "Target Support Files/Pods-TableViewRealmSync/Pods-TableViewRealmSync.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,17 +49,29 @@
 			files = (
 				9918C5EC2593A6AD00833B24 /* RealmSwift in Frameworks */,
 				9918C5EA2593A6AD00833B24 /* Realm in Frameworks */,
+				122E736DB28EF8F58239E9C5 /* Pods_TableViewRealmSync.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		832AACA5C1A1BF62274EBFCE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				290A262554EBA74D3EE4EFA4 /* Pods-TableViewRealmSync.debug.xcconfig */,
+				D98ABBDB0EE5324EE0D25C54 /* Pods-TableViewRealmSync.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9918C5C72593A3F900833B24 = {
 			isa = PBXGroup;
 			children = (
 				9918C5D22593A3F900833B24 /* TableViewRealmSync */,
 				9918C5D12593A3F900833B24 /* Products */,
+				832AACA5C1A1BF62274EBFCE /* Pods */,
+				FAD4937B50A1360D023A438C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +86,8 @@
 		9918C5D22593A3F900833B24 /* TableViewRealmSync */ = {
 			isa = PBXGroup;
 			children = (
+				99A19B3525C84B420091ABD8 /* GoogleService-Info.plist */,
+				9918C5EF2593A7F800833B24 /* Models.swift */,
 				9918C6002594BB4600833B24 /* ViewController */,
 				9918C5D32593A3F900833B24 /* AppDelegate.swift */,
 				9918C5D52593A3F900833B24 /* SceneDelegate.swift */,
@@ -73,7 +95,6 @@
 				9918C5DC2593A3FA00833B24 /* Assets.xcassets */,
 				9918C5DE2593A3FA00833B24 /* LaunchScreen.storyboard */,
 				9918C5E12593A3FA00833B24 /* Info.plist */,
-				9918C5EF2593A7F800833B24 /* Models.swift */,
 			);
 			path = TableViewRealmSync;
 			sourceTree = "<group>";
@@ -82,10 +103,19 @@
 			isa = PBXGroup;
 			children = (
 				9918C5D72593A3F900833B24 /* ContactListViewController.swift */,
-				9918C5F82594B03100833B24 /* AddNameViewController.swift */,
+				9918C5F82594B03100833B24 /* AddContactViewController.swift */,
 				99E12E512594C37C00B97468 /* ContactViewController.swift */,
+				99518EF325A35EEF00807E13 /* LoginViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FAD4937B50A1360D023A438C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A0BA10CCFE9F9418E6BE80F8 /* Pods_TableViewRealmSync.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,9 +125,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9918C5E42593A3FA00833B24 /* Build configuration list for PBXNativeTarget "TableViewRealmSync" */;
 			buildPhases = (
+				DCE8359DF87E1B810926B1AC /* [CP] Check Pods Manifest.lock */,
 				9918C5CC2593A3F900833B24 /* Sources */,
 				9918C5CD2593A3F900833B24 /* Frameworks */,
 				9918C5CE2593A3F900833B24 /* Resources */,
+				D4B86919CCEED954AB6A2AFD /* [CP] Embed Pods Frameworks */,
+				E62D69C1001414B14F744052 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -153,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9918C5E02593A3FA00833B24 /* LaunchScreen.storyboard in Resources */,
+				99A19B3625C84B420091ABD8 /* GoogleService-Info.plist in Resources */,
 				9918C5DD2593A3FA00833B24 /* Assets.xcassets in Resources */,
 				9918C5DB2593A3F900833B24 /* Main.storyboard in Resources */,
 			);
@@ -160,13 +194,73 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D4B86919CCEED954AB6A2AFD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TableViewRealmSync/Pods-TableViewRealmSync-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TableViewRealmSync/Pods-TableViewRealmSync-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TableViewRealmSync/Pods-TableViewRealmSync-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCE8359DF87E1B810926B1AC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TableViewRealmSync-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E62D69C1001414B14F744052 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TableViewRealmSync/Pods-TableViewRealmSync-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TableViewRealmSync/Pods-TableViewRealmSync-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TableViewRealmSync/Pods-TableViewRealmSync-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9918C5CC2593A3F900833B24 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99518EF425A35EEF00807E13 /* LoginViewController.swift in Sources */,
 				9918C5F02593A7F800833B24 /* Models.swift in Sources */,
-				9918C5F92594B03100833B24 /* AddNameViewController.swift in Sources */,
+				9918C5F92594B03100833B24 /* AddContactViewController.swift in Sources */,
 				9918C5D82593A3F900833B24 /* ContactListViewController.swift in Sources */,
 				9918C5D42593A3F900833B24 /* AppDelegate.swift in Sources */,
 				9918C5D62593A3F900833B24 /* SceneDelegate.swift in Sources */,
@@ -314,6 +408,7 @@
 		};
 		9918C5E52593A3FA00833B24 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 290A262554EBA74D3EE4EFA4 /* Pods-TableViewRealmSync.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -333,6 +428,7 @@
 		};
 		9918C5E62593A3FA00833B24 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D98ABBDB0EE5324EE0D25C54 /* Pods-TableViewRealmSync.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
