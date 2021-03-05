@@ -7,6 +7,7 @@ target 'TableViewRealmSync' do
   pod 'GoogleSignIn'	
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Crashlytics'
 
   # Pods for TableViewRealmSync
 

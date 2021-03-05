@@ -43,6 +43,7 @@ class AddContactViewController: UIViewController {
                         let contact = Contact(partition: partition)
                         contact.firstName = firstName
                         contact.lastName = lastName
+                        contact.contactAdded = nil
                         realm.add(contact)
                         completionHandler(true)
                     }

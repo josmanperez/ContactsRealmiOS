@@ -16,6 +16,7 @@ class Contact: Object {
     @objc dynamic var _partition: String = ""
     @objc dynamic var firstName: String = ""
     @objc dynamic var lastName: String = ""
+    @objc dynamic var contactAdded: Date?
     
     override static func primaryKey() -> String? {
         return "_id"
