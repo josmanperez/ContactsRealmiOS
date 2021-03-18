@@ -99,6 +99,10 @@ class ContactListViewController: UIViewController, SaveContactDelegate {
             if let vc = segue.destination as? AddContactViewController {
                 vc.user = userData
             }
+        } else if segue.identifier == "showUserProfile" {
+            if let vc = segue.destination as? ProfileViewController {
+                vc.userData = userData
+            }
         }
     }
     

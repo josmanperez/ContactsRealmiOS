@@ -20,6 +20,8 @@
 		9918C5F92594B03100833B24 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918C5F82594B03100833B24 /* AddContactViewController.swift */; };
 		99518EF425A35EEF00807E13 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99518EF325A35EEF00807E13 /* LoginViewController.swift */; };
 		99A19B3625C84B420091ABD8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 99A19B3525C84B420091ABD8 /* GoogleService-Info.plist */; };
+		99D94A4C26039F3500778023 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D94A4B26039F3500778023 /* ProfileViewController.swift */; };
+		99D94A502603A2FE00778023 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 99D94A4F2603A2FE00778023 /* Kingfisher */; };
 		99E12E522594C37C00B97468 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E12E512594C37C00B97468 /* ContactViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,7 @@
 		9918C5F82594B03100833B24 /* AddContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		99518EF325A35EEF00807E13 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99A19B3525C84B420091ABD8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		99D94A4B26039F3500778023 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		99E12E512594C37C00B97468 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		A0BA10CCFE9F9418E6BE80F8 /* Pods_TableViewRealmSync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TableViewRealmSync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98ABBDB0EE5324EE0D25C54 /* Pods-TableViewRealmSync.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TableViewRealmSync.release.xcconfig"; path = "Target Support Files/Pods-TableViewRealmSync/Pods-TableViewRealmSync.release.xcconfig"; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99D94A502603A2FE00778023 /* Kingfisher in Frameworks */,
 				9918C5EC2593A6AD00833B24 /* RealmSwift in Frameworks */,
 				9918C5EA2593A6AD00833B24 /* Realm in Frameworks */,
 				122E736DB28EF8F58239E9C5 /* Pods_TableViewRealmSync.framework in Frameworks */,
@@ -106,6 +110,7 @@
 				9918C5F82594B03100833B24 /* AddContactViewController.swift */,
 				99E12E512594C37C00B97468 /* ContactViewController.swift */,
 				99518EF325A35EEF00807E13 /* LoginViewController.swift */,
+				99D94A4B26039F3500778023 /* ProfileViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 			packageProductDependencies = (
 				9918C5E92593A6AD00833B24 /* Realm */,
 				9918C5EB2593A6AD00833B24 /* RealmSwift */,
+				99D94A4F2603A2FE00778023 /* Kingfisher */,
 			);
 			productName = TableViewRealmSync;
 			productReference = 9918C5D02593A3F900833B24 /* TableViewRealmSync.app */;
@@ -170,6 +176,7 @@
 			mainGroup = 9918C5C72593A3F900833B24;
 			packageReferences = (
 				9918C5E82593A6AD00833B24 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				99D94A4E2603A2FE00778023 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 9918C5D12593A3F900833B24 /* Products */;
 			projectDirPath = "";
@@ -264,6 +271,7 @@
 				9918C5D82593A3F900833B24 /* ContactListViewController.swift in Sources */,
 				9918C5D42593A3F900833B24 /* AppDelegate.swift in Sources */,
 				9918C5D62593A3F900833B24 /* SceneDelegate.swift in Sources */,
+				99D94A4C26039F3500778023 /* ProfileViewController.swift in Sources */,
 				99E12E522594C37C00B97468 /* ContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +486,14 @@
 				minimumVersion = 10.4.0;
 			};
 		};
+		99D94A4E2603A2FE00778023 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -490,6 +506,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9918C5E82593A6AD00833B24 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		99D94A4F2603A2FE00778023 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 99D94A4E2603A2FE00778023 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

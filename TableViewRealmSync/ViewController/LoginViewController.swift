@@ -138,7 +138,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
             guard let token = token else {
                 // TO-DO: Handle error
                 return }
-            print(token)
             app.login(credentials: Credentials.jwt(token: token)) {
                 result in
                 DispatchQueue.main.async {
