@@ -217,6 +217,7 @@
                         <outlet property="email" destination="r1P-SY-Xx4" id="JMA-Pq-axv"/>
                         <outlet property="errorMessage" destination="BwC-iW-Eci" id="ime-wr-jPW"/>
                         <outlet property="googleSignInBtn" destination="KDK-7f-xgd" id="r8O-zZ-HOI"/>
+                        <outlet property="otherProviders" destination="mab-tp-VDX" id="iUQ-gH-AJr"/>
                         <outlet property="password" destination="0cd-Yo-qE2" id="m3h-yp-beK"/>
                         <outlet property="signInBtn" destination="5Aa-p4-Wud" id="dWb-5Y-Slt"/>
                         <outlet property="signUpBtn" destination="fGS-76-z69" id="12r-DH-i5L"/>

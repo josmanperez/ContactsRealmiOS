@@ -29,6 +29,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     @IBOutlet weak var signUpBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var googleSignInBtn: GIDSignInButton!
+    @IBOutlet weak var otherProviders: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +78,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         activityIndicator.isHidden = !loading
         signUpBtn.isEnabled = !loading
         signInBtn.isEnabled = !loading
+        otherProviders.isEnabled = !loading
         password.isEnabled = !loading
         email.isEnabled = !loading
     }
@@ -166,16 +168,18 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         let database = client.database(named: "testSync")
         let collection = database.collection(withName: "CustomUserData")
         
-        collection.insertOne([
+        collection.updateOneDocument(
+            filter: ["userId" : AnyBSON(user.id)],
+            update: [
             "userId": AnyBSON(user.id),
             "uuid": AnyBSON(jwtResult.user.uid),
             "picture": AnyBSON("\(jwtResult.user.photoURL?.absoluteString ?? "")")
-        ]) { result in
+        ], upsert: true) { result in
             switch result {
             case .failure(let error):
                 print("Failed to insert document \(error.localizedDescription)")
-            case .success(let newObjectId):
-                print("Inserted custom user data document with object ID: \(newObjectId)")
+            case .success(let updateResult):
+                print("Matched: \(updateResult.matchedCount), updated: \(updateResult.modifiedCount)")
             }
         }
                 
