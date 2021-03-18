@@ -87,8 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				99A19B3525C84B420091ABD8 /* GoogleService-Info.plist */,
-				9918C5EF2593A7F800833B24 /* Models.swift */,
 				9918C6002594BB4600833B24 /* ViewController */,
+				9918C5EF2593A7F800833B24 /* Models.swift */,
 				9918C5D32593A3F900833B24 /* AppDelegate.swift */,
 				9918C5D52593A3F900833B24 /* SceneDelegate.swift */,
 				9918C5D92593A3F900833B24 /* Main.storyboard */,

@@ -7,7 +7,9 @@
 
 import UIKit
 import RealmSwift
+import Realm.RLMUser
 import GoogleSignIn
+import FirebaseUI
 
 class LoginViewController: UIViewController, GIDSignInDelegate {
     
@@ -119,7 +121,67 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         
     }
     
-    private func openRealmFor(user: User) {
+    @IBAction func openProviders(_ sender: Any) {
+        let authUI = FUIAuth.defaultAuthUI()
+        authUI?.providers = [FUIOAuth.githubAuthProvider()]
+        authUI?.delegate = self
+        guard let viewController = authUI?.authViewController() else { return }
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    /** Function to authenticate a user using the `Credentials` for `jwt`
+     */
+    private func userAuthenticatedWithJWT(with firebaseAuth: AuthDataResult?) {
+        Auth.auth().currentUser?.getIDToken(completion: { (token, error) in
+            guard let token = token else {
+                // TO-DO: Handle error
+                return }
+            print(token)
+            app.login(credentials: Credentials.jwt(token: token)) {
+                result in
+                DispatchQueue.main.async {
+                    self.setLoading(false)
+                    switch result {
+                    case .success(let user):
+                        if let jwtResult = firebaseAuth {
+                            self.saveCustomUserData(user: user, jwtResult: jwtResult)
+                        }
+                        self.openRealmFor(user: user)
+                    case .failure(let error):
+                        self.errorMessage.text = "Login failed: \(error.localizedDescription)"
+                        self.errorMessage.isHidden = false
+                        return
+                    }
+                }
+            }
+        })
+    }
+    
+    /** Function to save custom user data when using `JWT` token for `Credentials`
+     *
+     */
+    private func saveCustomUserData(user: RLMUser, jwtResult: AuthDataResult) {
+        // Write using MongoDB
+        let client = user.mongoClient("mongodb-atlas")
+        let database = client.database(named: "testSync")
+        let collection = database.collection(withName: "CustomUserData")
+        
+        collection.insertOne([
+            "userId": AnyBSON(user.id),
+            "uuid": AnyBSON(jwtResult.user.uid),
+            "picture": AnyBSON("\(jwtResult.user.photoURL?.absoluteString ?? "")")
+        ]) { result in
+            switch result {
+            case .failure(let error):
+                print("Failed to insert document \(error.localizedDescription)")
+            case .success(let newObjectId):
+                print("Inserted custom user data document with object ID: \(newObjectId)")
+            }
+        }
+                
+    }
+    
+    private func openRealmFor(user: RLMUser) {
         self.setLoading(true)
         var configuraiton = user.configuration(partitionValue: "user=\(user.id)")
         configuraiton.objectTypes = [Usuario.self, Contact.self]
@@ -145,4 +207,32 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     }
     
     
+}
+
+extension LoginViewController: FUIAuthDelegate {
+    
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        if let error = error as NSError?,
+           error.code == FUIAuthErrorCode.mergeConflict.rawValue {
+            // Merge conflict error, discard the anonymous user and login as the existing
+            // non-anonymous user.
+            guard let credential = error.userInfo[FUIAuthCredentialKey] as? AuthCredential else {
+                print("Received merge conflict error without auth credential!")
+                return
+            }
+            
+            Auth.auth().signIn(with: credential) { (dataResult, error) in
+                if let error = error as NSError? {
+                    print("Failed to re-login: \(error)")
+                    return
+                }
+                self.userAuthenticatedWithJWT(with: authDataResult)
+            }
+        } else if let error = error {
+            // Some non-merge conflict error happened.
+            print("Failed to log in: \(error)")
+            return
+        }
+        userAuthenticatedWithJWT(with: authDataResult)
+    }
 }
